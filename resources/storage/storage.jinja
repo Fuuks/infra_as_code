@@ -1,9 +1,9 @@
 resources:
-- name: test-bucket
+- name: {{env['deployment']}}-bucket-first123
   type: storage.v1.bucket
   properties:
+    project: ysance-billing
     location: {{properties['region']}}
-    kind: storage#bucket
     storageClass: {{properties['storageClass']}}
     versionning:
       enabled: false

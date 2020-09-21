@@ -9,31 +9,19 @@ imports:
 # with the names of the templates.
 resources:
 - name: pubsub
-  type: /mnt/c/Users/mihenandi-fuki.wony/Documents/ysance/52entertainment/infra_as_code/pubsub/pubsub.jinja
+  type: /mnt/c/Users/mihenandi-fuki.wony/Documents/ysance/52entertainment/infra_as_code/resources/pubsub/pubsub.jinja
   properties:
     ackDeadlineSeconds: 30
 
 - name: bigquery
-  type: /mnt/c/Users/mihenandi-fuki.wony/Documents/ysance/52entertainment/infra_as_code/bigquery/bigquery.jinja
+  type: /mnt/c/Users/mihenandi-fuki.wony/Documents/ysance/52entertainment/infra_as_code/resources/bigquery/bigquery.jinja
 
 - name: storage
-  type: storage.jinja
+  type: /mnt/c/Users/mihenandi-fuki.wony/Documents/ysance/52entertainment/infra_as_code/resources/storage/storage.jinja
   properties:
     name: test-bucket-name
     region: us-central1
     storageClass: REGIONAL
-
-- name: "my-topic-to-avro"
-  type: 'ysance-billing/dataflow:dataflow.projects.locations.templates.launch'
-  properties:
-    projectId: ysance-billing
-    gcsPath: "gs://test-create-123"
-    jobName: "my-topic-to-avro"
-    location: "europe-west1"
-    parameters:
-      inputTopic: "projects/ysance-billing/topics/test"
-      outputDirectory: "gs://test-create-123/"
-      avroTempDirectory: "gs://test-create-123/"
 
 - name: dataflow
   type: ysance-billing/dataflow:dataflow.projects.locations.templates.launch
