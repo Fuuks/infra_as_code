@@ -1,0 +1,11 @@
+resources:
+- name: test-bucket
+  type: storage.v1.bucket
+  properties:
+    location: {{properties['region']}}
+    kind: storage#bucket
+    storageClass: {{properties['storageClass']}}
+    versionning:
+      enabled: false
+
+      

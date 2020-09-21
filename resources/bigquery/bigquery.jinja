@@ -1,0 +1,16 @@
+# Can't use deployment name as it is going to be filled in with a generated
+# name which has dashes in it, which are not valid bigquery name characters.
+{% set DATASET = "dev_dataset" %}
+{% set TABLE = "dev_table" %}
+resources:
+- name: {{ DATASET }}-test
+  type: bigquery.v2.dataset
+  properties:
+    datasetReference:
+      datasetId: {{ DATASET }}
+- name: {{ TABLE }}-test
+  type: bigquery.v2.table
+  properties:
+    datasetId: $(ref.{{ DATASET }}-test.datasetReference.datasetId)
+    tableReference:
+      tableId: {{ TABLE }}

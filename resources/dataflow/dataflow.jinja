@@ -1,0 +1,15 @@
+resources:
+  - name: dataflow
+    properties:
+      projectId: {{properties["projetId"]}}
+      location: {{properties["location"]}}
+      gcsPath: {{properties["gcsPath"]}}
+      jobName: {{properties["jobName"]}}
+      environment:
+        bypassTempDirValidation: {{properties["environment"]["bypassTempDirValidation"]}}
+        tempLocation: {{properties["environment"]["tempLocation"]}}
+        ipConfiguration: {{properties["environment"]["ipConfiguration"]}}
+        additionalExperiments: []
+      parameters:
+        inputFile: {{properties["parameters"]["inputFile"]}}
+        output: {{properties["parameters"]["output"]}}

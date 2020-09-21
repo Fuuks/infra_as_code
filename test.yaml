@@ -1,0 +1,16 @@
+resources:
+- name: dataflow
+  type: ysance-billing/dataflow:dataflow.projects.locations.templates.launch
+  properties:
+    projectId: ysance-billing
+    location: us-central1
+    gcsPath: gs://dataflow-templates-us-central1/latest/Word_Count
+    jobName: testing-job
+    environment:
+      bypassTempDirValidation: false
+      tempLocation: gs://test-create-123/dataflow/tmp
+      ipConfiguration: WORKER_IP_UNSPECIFIED
+      additionalExperiments: []
+    parameters:
+      inputFile: gs://dataflow-samples-test123/shakespeare/kinglear.txt
+      output: gs://test-create-123/dataflow/output/myoutput

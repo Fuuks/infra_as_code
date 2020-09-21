@@ -1,0 +1,21 @@
+# For a list of supported resources,
+# see https://cloud.google.com/deployment-manager/docs/configuration/supported-resource-types.
+
+{% set topic = 'configurable-pubsub-topic-dev' %}
+{% set subscription = 'dev-topic-subscription' %}
+
+resources:
+- type: pubsub.v1.topic
+  name: my-topic
+  properties:
+    topic: {{topic}}
+
+- type: pubsub.v1.subscription
+  name: my-subscription
+  properties:
+    subscription: {{subscription}}
+    topic: $(ref.my-topic.name)
+    {% if "ackDeadlineSeconds" in properties %}
+    ackDeadlineSeconds: {{ properties["ackDeadlineSeconds"] }}
+    {% endif %}
+
