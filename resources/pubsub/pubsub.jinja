@@ -1,21 +1,32 @@
 # For a list of supported resources,
 # see https://cloud.google.com/deployment-manager/docs/configuration/supported-resource-types.
-
-{% set topic = 'configurable-pubsub-topic-dev' %}
-{% set subscription = 'dev-topic-subscription' %}
+{% set topic = 'ffo'%}
+{% set subscription = 'fiftytwosub'%}
 
 resources:
 - type: pubsub.v1.topic
-  name: my-topic
+  name: {{properties['topic_name']}}
   properties:
     topic: {{topic}}
+    labels:
+      env: {{properties['env']}}
+      businessunit: {{properties['businessunit']}}
+      tier: {{properties['tier']}}
+      ops: {{properties['ops']}}
 
 - type: pubsub.v1.subscription
-  name: my-subscription
+  name: {{properties['sub_name']}}
   properties:
     subscription: {{subscription}}
-    topic: $(ref.my-topic.name)
+    topic: $(ref.{{properties['topic_name']}}.name)
     {% if "ackDeadlineSeconds" in properties %}
     ackDeadlineSeconds: {{ properties["ackDeadlineSeconds"] }}
     {% endif %}
+    labels:
+      env: {{properties['env']}}
+      businessunit: {{properties['businessunit']}}
+      tier: {{properties['tier']}}
+      ops: {{properties['ops']}}
 
+
+   

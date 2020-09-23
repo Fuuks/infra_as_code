@@ -1,11 +1,14 @@
 resources:
-- name: {{env['deployment']}}-bucket-first123
+- name: {{properties['name']}}
   type: storage.v1.bucket
   properties:
-    project: ysance-billing
+    project: {{env['project']}}
     location: {{properties['region']}}
     storageClass: {{properties['storageClass']}}
     versionning:
       enabled: false
-
-      
+    labels:
+      env: {{properties['env']}}
+      businessunit: {{properties['businessunit']}}
+      tier: {{properties['tier']}}
+      ops: {{properties['ops']}}

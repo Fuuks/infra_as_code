@@ -1,42 +1,13 @@
 imports:
 - path: /mnt/c/Users/mihenandi-fuki.wony/Documents/ysance/52entertainment/infra_as_code/resources/pubsub/pubsub.jinja
 - path: /mnt/c/Users/mihenandi-fuki.wony/Documents/ysance/52entertainment/infra_as_code/resources/bigquery/bigquery.jinja
-- path: /mnt/c/Users/mihenandi-fuki.wony/Documents/ysance/52entertainment/infra_as_code/resources/dataflow/dataflow.jinja
 - path: /mnt/c/Users/mihenandi-fuki.wony/Documents/ysance/52entertainment/infra_as_code/resources/storage/storage.jinja
+- path: /mnt/c/Users/mihenandi-fuki.wony/Documents/ysance/52entertainment/infra_as_code/resources/cloudbuild/cloudbuild.jinja
+- path: /mnt/c/Users/mihenandi-fuki.wony/Documents/ysance/52entertainment/infra_as_code/app.jinja
 
 
 # In the resources section below, the properties of the resources are replaced
 # with the names of the templates.
 resources:
-- name: pubsub
-  type: /mnt/c/Users/mihenandi-fuki.wony/Documents/ysance/52entertainment/infra_as_code/resources/pubsub/pubsub.jinja
-  properties:
-    ackDeadlineSeconds: 30
-
-- name: bigquery
-  type: /mnt/c/Users/mihenandi-fuki.wony/Documents/ysance/52entertainment/infra_as_code/resources/bigquery/bigquery.jinja
-
-- name: storage
-  type: /mnt/c/Users/mihenandi-fuki.wony/Documents/ysance/52entertainment/infra_as_code/resources/storage/storage.jinja
-  properties:
-    name: test-bucket-name
-    region: us-central1
-    storageClass: REGIONAL
-
-- name: dataflow
-  type: ysance-billing/dataflow:dataflow.projects.locations.templates.launch
-  properties:
-    projectId: ysance-billing
-    location: us-central1
-    gcsPath: gs://dataflow-templates-us-central1/latest/Word_Count
-    jobName: testing-job2
-    environment:
-      bypassTempDirValidation: false
-      tempLocation: gs://test-create-123/dataflow/tmp
-      ipConfiguration: WORKER_IP_UNSPECIFIED
-      additionalExperiments: []
-    parameters:
-      inputFile: gs://dataflow-samples-test123/shakespeare/kinglear.txt
-      output: gs://test-create-123/dataflow/output/myoutput
-
-
+- name: app-template
+  type: /mnt/c/Users/mihenandi-fuki.wony/Documents/ysance/52entertainment/infra_as_code/app.jinja

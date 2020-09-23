@@ -1,0 +1,20 @@
+resources:
+- name: {{env['name']}}
+  action: gcp-types/cloudbuild-v1:cloudbuild.projects.builds.create
+  metadata:
+    runtimePolicy:
+    - CREATE
+  properties:
+    steps:
+    - name: 'gcr.io/cloud-builders/git'
+      args:
+      - clone
+      - https://source.developers.google.com/p/{{env['project']}}/r/{{properties['repo_name']}}
+    - name: gcr.io/cloud-builders/gsutil
+      args: ['-m', 'cp', '-r', '{{properties['repo_name']}}', 'gs://$(ref.{{ properties["gcs"] }}.name)']
+    - name: 'ubuntu'
+      args: ['touch', 'index']
+    - name: gcr.io/cloud-builders/gsutil
+      args: ['cp', 'index', 'gs://$(ref.{{ properties["gcs"] }}.name){{properties['folder']}}']
+    timeout: {{properties['timeout']}}
+    

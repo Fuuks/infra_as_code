@@ -1,0 +1,54 @@
+# In the resources section below, the properties of the resources are replaced
+# with the names of the templates.
+
+#Labels for finops
+{% set  ENV = "dev"  %}
+{% set  BUSINESSUNIT = "it" %}
+{% set  TIER_MIDDLE = "middle"  %}
+{% set  TIER_FRONT = "front"  %}
+{% set  TIER_BACK = "back"  %}
+{% set  TIER_AS_CODE = "infraascode"  %}
+{% set  OPS = "fw" %}
+
+resources:
+- name: {{env['deployment']}}-pubsub
+  type: /mnt/c/Users/mihenandi-fuki.wony/Documents/ysance/52entertainment/infra_as_code/resources/pubsub/pubsub.jinja
+  properties:
+    ackDeadlineSeconds: 30
+    topic_name: {{env['deployment']}}-topic
+    sub_name: {{env['deployment']}}-subscription
+    env: {{ENV}}
+    businessunit: {{BUSINESSUNIT}}
+    tier: {{TIER_MIDDLE}}
+    ops: {{OPS}}
+
+- name: {{env['deployment']}}-bigquery
+  type: /mnt/c/Users/mihenandi-fuki.wony/Documents/ysance/52entertainment/infra_as_code/resources/bigquery/bigquery.jinja
+  properties:
+    env: {{ENV}}
+    businessunit: {{BUSINESSUNIT}}
+    tier: {{TIER_BACK}}
+    ops: {{OPS}}
+
+- name: {{env['deployment']}}-bucket
+  type: /mnt/c/Users/mihenandi-fuki.wony/Documents/ysance/52entertainment/infra_as_code/resources/storage/storage.jinja
+  properties:
+    name: {{env['deployment']}}-dataflow
+    region: eu
+    storageClass: STANDARD
+    env: {{ENV}}
+    businessunit: {{BUSINESSUNIT}}
+    tier: {{TIER_BACK}}
+    ops: {{OPS}}
+
+- name: {{env['deployment']}}-build
+  type: /mnt/c/Users/mihenandi-fuki.wony/Documents/ysance/52entertainment/infra_as_code/resources/cloudbuild/cloudbuild.jinja
+  properties:
+    gcs: {{env['deployment']}}-dataflow
+    repo_name: github_52ent_beam
+    folder: /staging/
+    timeout: 120s 
+    env: {{ENV}}
+    businessunit: {{BUSINESSUNIT}}
+    tier: {{TIER_AS_CODE}}
+    ops: {{OPS}}
