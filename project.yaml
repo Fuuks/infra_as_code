@@ -1,13 +1,13 @@
 imports:
-- path: /mnt/c/Users/mihenandi-fuki.wony/Documents/ysance/52entertainment/infra_as_code/resources/pubsub/pubsub.jinja
-- path: /mnt/c/Users/mihenandi-fuki.wony/Documents/ysance/52entertainment/infra_as_code/resources/bigquery/bigquery.jinja
-- path: /mnt/c/Users/mihenandi-fuki.wony/Documents/ysance/52entertainment/infra_as_code/resources/storage/storage.jinja
-- path: /mnt/c/Users/mihenandi-fuki.wony/Documents/ysance/52entertainment/infra_as_code/resources/cloudbuild/cloudbuild.jinja
-- path: /mnt/c/Users/mihenandi-fuki.wony/Documents/ysance/52entertainment/infra_as_code/app.jinja
+- path: resources/pubsub/pubsub.jinja
+- path: resources/bigquery/bigquery.jinja
+- path: resources/storage/storage.jinja
+- path: resources/cloudbuild/cloudbuild.jinja
+- path: infra_as_code/app.jinja
 
 
 # In the resources section below, the properties of the resources are replaced
 # with the names of the templates.
 resources:
 - name: app-template
-  type: /mnt/c/Users/mihenandi-fuki.wony/Documents/ysance/52entertainment/infra_as_code/app.jinja
+  type: app.jinja
