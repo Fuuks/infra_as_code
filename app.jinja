@@ -12,7 +12,7 @@
 
 resources:
 - name: {{env['deployment']}}-pubsub
-  type: /mnt/c/Users/mihenandi-fuki.wony/Documents/ysance/52entertainment/infra_as_code/resources/pubsub/pubsub.jinja
+  type: resources/pubsub/pubsub.jinja
   properties:
     ackDeadlineSeconds: 30
     topic_name: {{env['deployment']}}-topic
@@ -23,7 +23,7 @@ resources:
     ops: {{OPS}}
 
 - name: {{env['deployment']}}-bigquery
-  type: /mnt/c/Users/mihenandi-fuki.wony/Documents/ysance/52entertainment/infra_as_code/resources/bigquery/bigquery.jinja
+  type: resources/bigquery/bigquery.jinja
   properties:
     env: {{ENV}}
     businessunit: {{BUSINESSUNIT}}
@@ -31,7 +31,7 @@ resources:
     ops: {{OPS}}
 
 - name: {{env['deployment']}}-bucket
-  type: /mnt/c/Users/mihenandi-fuki.wony/Documents/ysance/52entertainment/infra_as_code/resources/storage/storage.jinja
+  type: resources/storage/storage.jinja
   properties:
     name: {{env['deployment']}}-dataflow
     region: eu
@@ -42,7 +42,7 @@ resources:
     ops: {{OPS}}
 
 - name: {{env['deployment']}}-build
-  type: /mnt/c/Users/mihenandi-fuki.wony/Documents/ysance/52entertainment/infra_as_code/resources/cloudbuild/cloudbuild.jinja
+  type: resources/cloudbuild/cloudbuild.jinja
   properties:
     gcs: {{env['deployment']}}-dataflow
     repo_name: github_52ent_beam
